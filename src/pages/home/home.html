@@ -1,14 +1,17 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      GitHub Users
     </ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div>
+      <ion-list>
+          <ion-item tappable *ngFor="let c of categories" (click)="loadContent(c.id)">
+            <h2 style="font-size: 14px;">{{c.name}}</h2>
+            <ion-icon name={{c.icon}} tappable clear item-end></ion-icon>
+          </ion-item>
+        </ion-list>
+</div>
 </ion-content>

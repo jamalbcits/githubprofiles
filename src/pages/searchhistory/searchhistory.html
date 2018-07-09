@@ -1,0 +1,52 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>searchhistory</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-list tappable>
+               
+        <ion-col width-33 >
+            <ion-label style="margin-top:0px">Sort By :&nbsp; </ion-label>
+            <ion-select interface="popover" selectedText [(ngModel)]="type" style="margin-top: -40px;margin-left: 35px;">
+              <ion-option >name</ion-option>
+              <ion-option >fav</ion-option>
+            </ion-select>
+      </ion-col>  
+
+      
+        <ion-label color="secondary">Successful Searches</ion-label>
+        <ion-item-sliding *ngFor="let item of items | arraySortPipe :type" >
+            <ion-item (click)="getUsers(item.name)"> {{item.name}} <ion-icon *ngIf="item.fav=='yes'" color="danger"  name="ios-heart" tappable clear item-end></ion-icon>
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button  (click)="favorite(item.name)" color="danger"><ion-icon name="heart"></ion-icon></button>
+            </ion-item-options>
+            <ion-item-options side="left">
+                <button ion-button  (click)="unfavorite(item.name)" color="danger"><ion-icon name="ios-close-outline"></ion-icon></button>
+              </ion-item-options>
+          </ion-item-sliding>
+      
+    </ion-list>
+
+    <!-- <ion-label color="primary">My Favourite Searches</ion-label>
+    <ion-list>
+        <ion-item *ngFor="let item of items_fav">{{item}}</ion-item>
+    </ion-list> -->
+
+    
+    <ion-label color="danger">Unsuccessful Searches</ion-label>
+    <ion-list>
+        <ion-item *ngFor="let item of items_unsuccess">{{item}}</ion-item>
+    </ion-list>
+
+    <button ion-button icon-end (click)="clearHistory()" style="float:right;" >
+        Clear
+        <ion-icon name="trash"></ion-icon>
+    </button>
+
+</ion-content>
