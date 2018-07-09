@@ -29,15 +29,33 @@ type;
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchhistoryPage');
     if(window.localStorage.getItem("SearchArray"))
-    this.items = JSON.parse(window.localStorage.getItem("SearchArray"));
+    this.items = this.removeDuplicates(JSON.parse(window.localStorage.getItem("SearchArray")));
     if(window.localStorage.getItem("SearchArray_unsuccess"))
     this.items_unsuccess = JSON.parse(window.localStorage.getItem("SearchArray_unsuccess"));
-    console.log(this.items);
+    console.log("here you go --->"+this.items);
     this.navBar.backButtonClick = () => {
         let pages = [{page: HomePage}
 	    ];
 	    this.navCtrl.setPages(pages);}
   }
+  removeDuplicates(arr){
+    var unique = [];
+    arr.forEach(function(d) {
+    var found = false;
+    unique.forEach(function(u) {
+        if(u.name == d.name) {
+            found = true;
+        }
+    });
+    if(!found) {
+      
+        unique.push({"name":d.name,"fav":d.fav},);
+    }
+});
+return unique;
+}
+
+
   getUsers(name){
    this.navCtrl.push(SearchPage,{historyname:name})
   }
